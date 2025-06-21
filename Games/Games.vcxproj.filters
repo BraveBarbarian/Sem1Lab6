@@ -21,6 +21,12 @@
     <ClCompile Include="Aufgabe3_Spiele.c">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="myTicBib.c">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="myBlackJackBib.c">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="myBib.h">

@@ -24,6 +24,7 @@
     <ProjectGuid>{ebc10abc-3af7-466e-a6a7-5355e4659565}</ProjectGuid>
     <RootNamespace>Games</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Sem1Games</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -129,6 +130,8 @@
   <ItemGroup>
     <ClCompile Include="Aufgabe3_Spiele.c" />
     <ClCompile Include="myBib.c" />
+    <ClCompile Include="myBlackJackBib.c" />
+    <ClCompile Include="myTicBib.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="myBib.h" />
