@@ -3,6 +3,7 @@
 #include <stdio.h> //printf, scanf
 #include <stdlib.h> //system, rand, srand
 #include <time.h> //time für srand
+#include <conio.h> // _getch
 
 //BlackJack Makros
 #define MAX_KARTEN 11 //Maximale Karten, die ein Spieler Ziehen darf
@@ -15,6 +16,6 @@ int blackJack();
 void deckInitialisieren(int deck[DECKGROESSE]);
 int karteZiehen(int deck[DECKGROESSE]);
 void regeln();
-
+void spielerZug(int spieler[MAX_KARTEN], int dealer[MAX_KARTEN], int deck[DECKGROESSE]);
 
 int scanInt();

@@ -5,8 +5,8 @@ Bibliothek für das Spiel Blackjack
 #include "myBib.h"
 
 int blackJack() {
-	char spieler[MAX_KARTEN] = { 0 };
-	char dealer[MAX_KARTEN] = { 0 };
+	int spieler[MAX_KARTEN] = { 0 };
+	int dealer[MAX_KARTEN] = { 0 };
 	int kartenDeck[DECKGROESSE] = { 0 }; //Kartendeck als Int
 	int regelAuswahl = 0;
 
@@ -20,39 +20,16 @@ int blackJack() {
 	{
 		regelAuswahl = scanInt();
 	} while (regelAuswahl > 2 || regelAuswahl < 1);
-	
+
 	system("cls"); //Consolenausgabe Leeren
 
 	if (regelAuswahl == 2)
 	{
 		regeln();
+		system("cls");
 	}
 
-	for (int i = 0; i < 1; i++)
-	{
-		int randomkarte = karteZiehen(kartenDeck);
-		if (randomkarte <= 10)
-			printf("%d\n", randomkarte);
-		else
-			switch (randomkarte)
-			{
-			case 11:
-				printf("B\n");
-				break;
-			case 12:
-				printf("D\n");
-				break;
-			case 13:
-				printf("K\n");
-				break;
-			case 14:
-				printf("A\n");
-				break;
-			default:
-				break;
-			}
-	}
-	
+	spielerZug(spieler, dealer, kartenDeck);
 
 	return 0;
 }
@@ -97,7 +74,7 @@ int karteZiehen(int deck[DECKGROESSE])
 		{
 			deck[random] = 0;
 			pruef = 1;
-		} 
+		}
 	} while (pruef != 1);
 
 	return karte;
@@ -119,5 +96,117 @@ void regeln() {
 	printf("- Der Dealer zieht Karten bis mindestens 17 Punkte erreicht sind.\n");
 	printf("Gewinn:\n");
 	printf("- Du gewinnst, wenn du n\x84her an 21 bist als der Dealer ohne \x81 \bber 21 zu gehen.\n");
-	printf("- Bei Gleichstand gibt es keinen Gewinn und keinen Verlust.\n");
+	printf("- Bei Gleichstand gibt es keinen Gewinn und keinen Verlust.\n\n");
+	printf("Bitte Dr\x81 \bcken Sie eine Taste um fortzufahren.");
+	int pruef = _getch();
+}
+
+void spielerZug(int spieler[MAX_KARTEN], int dealer[MAX_KARTEN], int deck[DECKGROESSE]) {
+	char spielZug = 0;
+	int gesamtWertDealer = 0;
+	int gesamtWertSpieler = 0;
+	int verloren = 0;
+	int kartenAnzahlSpieler = 0;
+	int kartenAnzahlDealer = 0;
+	spieler[0] = karteZiehen(deck);
+	spieler[1] = karteZiehen(deck);
+	dealer[0] = karteZiehen(deck);
+	dealer[1] = karteZiehen(deck);
+
+	do
+	{
+		system("cls");
+		printf("\n===================== BLACKJACK =====================\n");
+		printf("Dealer:\n");
+		if (dealer[0] <= 10)
+		{
+			gesamtWertDealer += dealer[0];
+			printf(" [ %d ]", dealer[0]);
+		}
+		else if (dealer[0] < 14)
+		{
+			gesamtWertDealer += 10;
+			switch (dealer[0])
+			{
+			case 11:
+				printf(" [ B ]");
+				break;
+			case 12:
+				printf(" [ D ]");
+				break;
+			case 13:
+				printf(" [ K ]");
+				break;
+			default:
+				break;
+			}
+		}
+		else
+		{
+			gesamtWertDealer += 11;
+			printf(" [ A ]");
+		}
+
+		printf(" [ \xDB ]\n");
+		printf("Gesamtwert: %d\n", gesamtWertDealer);
+
+		printf("\n-------------------------------\n");
+
+		printf("Spieler:\n");
+		for (int i = 0; spieler[i] != '\0'; i++)
+		{
+			if (spielZug == 'h')
+				spieler[i] = karteZiehen(deck);
+			if (spieler[i] <= 10)
+			{
+				gesamtWertSpieler += spieler[i];
+				printf(" [ %d ]", spieler[i]);
+			}
+			else if (spieler[i] < 14)
+			{
+				gesamtWertSpieler += 10;
+				switch (spieler[i])
+				{
+				case 11:
+					printf(" [ B ]");
+					break;
+				case 12:
+					printf(" [ D ]");
+					break;
+				case 13:
+					printf(" [ K ]");
+					break;
+				default:
+					break;
+				}
+			}
+			else
+			{
+				if (gesamtWertSpieler <= 10)
+					gesamtWertSpieler += 11;
+				else
+					gesamtWertSpieler += 1;
+				printf(" [ A ]");
+			}
+		}
+		printf("\n"); //schleife einfügen, while karte != '\0'
+		printf("Gesamtwert: %d\n", gesamtWertSpieler);
+		printf("=====================================================\n\n");
+
+		if (gesamtWertSpieler < 21)
+		{
+			printf("Bitte dr\x81 \bcken Sie 'h' f\x81r Hit und eine andere Taste f\x81r Stand\n");
+			spielZug = _getch();
+		}
+		else if (gesamtWertSpieler > 21) {
+			printf("Sie haben das Spiel leider verloren, weil Sie sich \x81 \bberkauft haben!");
+			verloren = 1;
+			return;
+		}
+
+		
+	} while (spielZug == 'h' || verloren == 1);
+
+
+return;
 }
