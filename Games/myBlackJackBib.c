@@ -103,11 +103,10 @@ void regeln() {
 
 void spielerZug(int spieler[MAX_KARTEN], int dealer[MAX_KARTEN], int deck[DECKGROESSE]) {
 	char spielZug = 0;
-	int gesamtWertDealer = 0;
-	int gesamtWertSpieler = 0;
 	int verloren = 0;
-	int kartenAnzahlSpieler = 0;
-	int kartenAnzahlDealer = 0;
+	int gesamtWertSpieler = 0;
+	int gesamtWertDealer = 0;
+	int spielerKarten = 0;
 	spieler[0] = karteZiehen(deck);
 	spieler[1] = karteZiehen(deck);
 	dealer[0] = karteZiehen(deck);
@@ -115,82 +114,25 @@ void spielerZug(int spieler[MAX_KARTEN], int dealer[MAX_KARTEN], int deck[DECKGR
 
 	do
 	{
+		if (spielZug == 'h')
+		{
+			spieler[kartenZaehlen(spieler)] = karteZiehen(deck);
+		}
 		system("cls");
 		printf("\n===================== BLACKJACK =====================\n");
 		printf("Dealer:\n");
-		if (dealer[0] <= 10)
-		{
-			gesamtWertDealer += dealer[0];
-			printf(" [ %d ]", dealer[0]);
-		}
-		else if (dealer[0] < 14)
-		{
-			gesamtWertDealer += 10;
-			switch (dealer[0])
-			{
-			case 11:
-				printf(" [ B ]");
-				break;
-			case 12:
-				printf(" [ D ]");
-				break;
-			case 13:
-				printf(" [ K ]");
-				break;
-			default:
-				break;
-			}
-		}
-		else
-		{
-			gesamtWertDealer += 11;
-			printf(" [ A ]");
-		}
 
-		printf(" [ \xDB ]\n");
-		printf("Gesamtwert: %d\n", gesamtWertDealer);
+		gesamtWertDealer = gesamtWert(kartenZaehlen(dealer), dealer);
+		printf(" [ \xDB ]\n"); //Verdeckte Karte
+		printf("\nGesamtwert: %d\n", gesamtWertDealer);
 
 		printf("\n-------------------------------\n");
 
 		printf("Spieler:\n");
-		for (int i = 0; spieler[i] != '\0'; i++)
-		{
-			if (spielZug == 'h')
-				spieler[i] = karteZiehen(deck);
-			if (spieler[i] <= 10)
-			{
-				gesamtWertSpieler += spieler[i];
-				printf(" [ %d ]", spieler[i]);
-			}
-			else if (spieler[i] < 14)
-			{
-				gesamtWertSpieler += 10;
-				switch (spieler[i])
-				{
-				case 11:
-					printf(" [ B ]");
-					break;
-				case 12:
-					printf(" [ D ]");
-					break;
-				case 13:
-					printf(" [ K ]");
-					break;
-				default:
-					break;
-				}
-			}
-			else
-			{
-				if (gesamtWertSpieler <= 10)
-					gesamtWertSpieler += 11;
-				else
-					gesamtWertSpieler += 1;
-				printf(" [ A ]");
-			}
-		}
+
 		printf("\n"); //schleife einfügen, while karte != '\0'
-		printf("Gesamtwert: %d\n", gesamtWertSpieler);
+		gesamtWertSpieler = gesamtWert(kartenZaehlen(spieler), spieler);
+		printf("\nGesamtwert: %d\n", gesamtWertSpieler);
 		printf("=====================================================\n\n");
 
 		if (gesamtWertSpieler < 21)
@@ -204,9 +146,92 @@ void spielerZug(int spieler[MAX_KARTEN], int dealer[MAX_KARTEN], int deck[DECKGR
 			return;
 		}
 
-		
+
 	} while (spielZug == 'h' || verloren == 1);
 
 
-return;
+	return;
 }
+
+int kartenZaehlen(int karten[MAX_KARTEN]) {
+	int anzahl = 0;
+	while (karten[anzahl] != '\0')
+	{
+		anzahl++;
+	}
+	return anzahl;
+}
+
+int gesamtWert(int anzahlKarten, int karten[MAX_KARTEN]) {
+	int gesamtWert = 0;
+	for (int i = 0; i < anzahlKarten; i++)
+	{
+		if (karten[i] <= 10)
+		{
+			printf(" [ %d ]", karten[i]);
+			gesamtWert += karten[i];
+		}
+		else
+		{
+			switch (karten[i])
+			{
+			case 11:
+				printf(" [ B ]");
+				break;
+			case 12:
+				printf(" [ D ]");
+				break;
+			case 13:
+				printf(" [ K ]");
+				break;
+			case 14:
+				printf(" [ A ]");
+				if (gesamtWert > 10)
+					gesamtWert += 1;
+				else
+					gesamtWert += 11;
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	return gesamtWert;
+}
+
+//for (int i = 0; spieler[i] != '\0'; i++)
+//{
+//	if (spielZug == 'h')
+//		spieler[i] = karteZiehen(deck);
+//	if (spieler[i] <= 10)
+//	{
+//		gesamtWertSpieler += spieler[i];
+//		printf(" [ %d ]", spieler[i]);
+//	}
+//	else if (spieler[i] < 14)
+//	{
+//		gesamtWertSpieler += 10;
+//		switch (spieler[i])
+//		{
+//		case 11:
+//			printf(" [ B ]");
+//			break;
+//		case 12:
+//			printf(" [ D ]");
+//			break;
+//		case 13:
+//			printf(" [ K ]");
+//			break;
+//		default:
+//			break;
+//		}
+//	}
+//	else
+//	{
+//		if (gesamtWertSpieler <= 10)
+//			gesamtWertSpieler += 11;
+//		else
+//			gesamtWertSpieler += 1;
+//		printf(" [ A ]");
+//	}
+//}

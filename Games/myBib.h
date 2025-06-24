@@ -17,5 +17,7 @@ void deckInitialisieren(int deck[DECKGROESSE]);
 int karteZiehen(int deck[DECKGROESSE]);
 void regeln();
 void spielerZug(int spieler[MAX_KARTEN], int dealer[MAX_KARTEN], int deck[DECKGROESSE]);
+int kartenZaehlen(int karten[MAX_KARTEN]);
+int gesamtWert(int anzahlKarten, int karten[MAX_KARTEN]);
 
 int scanInt();
