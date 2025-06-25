@@ -9,6 +9,7 @@
 #define MAX_KARTEN 11 //Maximale Karten, die ein Spieler Ziehen darf
 #define DECKGROESSE 312 //312 = 6x52 Karten für ein Standart Blackjack Deck
 #define VERSCHIEDENE_KARTEN 14 //Anzahl verschiedener Karten (2-10, B, D, K, A)
+#define SPIELERZAHL 2 //1 Spieler + 1 Dealer (noch nicht verstellbar)
 
 
 
@@ -19,5 +20,8 @@ void regeln();
 void spielerZug(int spieler[MAX_KARTEN], int dealer[MAX_KARTEN], int deck[DECKGROESSE]);
 int kartenZaehlen(int karten[MAX_KARTEN]);
 int gesamtWert(int anzahlKarten, int karten[MAX_KARTEN]);
+void druckeSpielfeld(int spieler[MAX_KARTEN], int dealer[MAX_KARTEN], int deck[DECKGROESSE], int gesamt[SPIELERZAHL]);
+
+
 
 int scanInt();
