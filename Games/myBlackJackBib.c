@@ -9,6 +9,7 @@ int blackJack() {
 	int dealer[MAX_KARTEN] = { 0 };
 	int kartenDeck[DECKGROESSE] = { 0 }; //Kartendeck als Int
 	int regelAuswahl = 0;
+	char wiederholen = 0;
 
 	deckInitialisieren(kartenDeck);
 
@@ -28,8 +29,16 @@ int blackJack() {
 		regeln();
 		system("cls");
 	}
+	do {
+		spielerZug(spieler, dealer, kartenDeck);
+ 		printf("\nBitte geben Sie 'j' ein um noch eine Runde zu Spielen\n");
+		printf("oder etwas anderes um das Programm zu beenden!");
+		kartenLeeren(dealer);
+		kartenLeeren(spieler);
+		wiederholen = _getch();
+	} while (wiederholen == 'j' || wiederholen == 'J');
+	
 
-	spielerZug(spieler, dealer, kartenDeck);
 
 	return 0;
 }
@@ -226,4 +235,14 @@ void druckeSpielfeld(int spieler[MAX_KARTEN], int dealer[MAX_KARTEN], int deck[D
 	printf("=====================================================\n\n");
 	return;
 
+}
+
+void kartenLeeren(int karten[MAX_KARTEN]) {
+	int i = 0;
+	
+		while(karten[i] != 0 || karten[i] != '\0')
+		{
+			karten[i] = 0;
+			i++;
+		}
 }

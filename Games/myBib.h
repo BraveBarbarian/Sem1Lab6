@@ -21,6 +21,7 @@ void spielerZug(int spieler[MAX_KARTEN], int dealer[MAX_KARTEN], int deck[DECKGR
 int kartenZaehlen(int karten[MAX_KARTEN]);
 int gesamtWert(int anzahlKarten, int karten[MAX_KARTEN]);
 void druckeSpielfeld(int spieler[MAX_KARTEN], int dealer[MAX_KARTEN], int deck[DECKGROESSE], int gesamt[SPIELERZAHL]);
+void kartenLeeren(int karten[MAX_KARTEN]);
 
 
 
