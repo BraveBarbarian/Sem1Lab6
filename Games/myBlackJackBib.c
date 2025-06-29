@@ -240,9 +240,10 @@ void druckeSpielfeld(int spieler[MAX_KARTEN], int dealer[MAX_KARTEN], int deck[D
 void kartenLeeren(int karten[MAX_KARTEN]) {
 	int i = 0;
 	
-		while(karten[i] != 0 || karten[i] != '\0')
+		while(karten[i] != 0)
 		{
 			karten[i] = 0;
 			i++;
 		}
 }
+
