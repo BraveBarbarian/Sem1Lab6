@@ -11,7 +11,8 @@
 #define VERSCHIEDENE_KARTEN 14 //Anzahl verschiedener Karten (2-10, B, D, K, A)
 #define SPIELERZAHL 2 //1 Spieler + 1 Dealer (noch nicht verstellbar)
 
-
+//TicTacToe Makros
+#define SPIELFELD_GROESSE 3 //Bis jetzt NUR mit Spielfeldgröße 3 getestet.  
 
 int blackJack();
 void deckInitialisieren(int deck[DECKGROESSE]);
@@ -26,3 +27,9 @@ void kartenLeeren(int karten[MAX_KARTEN]);
 
 
 int scanInt();
+char scanChar();
+
+
+
+void druckeTicTacToe(char spielfeld[SPIELFELD_GROESSE][SPIELFELD_GROESSE]);
+void ticTacToe();

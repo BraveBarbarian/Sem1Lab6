@@ -5,12 +5,13 @@ Bibliothek für das Spiel Blackjack
 #include "myBib.h"
 
 int blackJack() {
-	int spieler[MAX_KARTEN] = { 0 };
-	int dealer[MAX_KARTEN] = { 0 };
+	int spieler[MAX_KARTEN] = { 0 }; //"Handkarten" des Spielers
+	int dealer[MAX_KARTEN] = { 0 }; //"Handkarten" des Dealers
 	int kartenDeck[DECKGROESSE] = { 0 }; //Kartendeck als Int
-	int regelAuswahl = 0;
-	char wiederholen = 0;
+	int regelAuswahl = 0; //Wert für if-statement der Regeln
+	char wiederholen = 0; //Variable zum Wiederholen des Programms
 
+	//Deck "Mischen" und alle Karten festlegen
 	deckInitialisieren(kartenDeck);
 
 
@@ -132,7 +133,8 @@ void spielerZug(int spieler[MAX_KARTEN], int dealer[MAX_KARTEN], int deck[DECKGR
 		if (gesamt[1] < 21)
 		{
 			printf("Bitte dr\x81 \bcken Sie 'h' f\x81r Hit und eine andere Taste f\x81r Stand\n");
-			spielZug = _getch();
+			spielZug = getchar();
+			while (getchar() != '\n');
 		}
 		else if (gesamt[1] > 21) {
 			printf("Sie haben das Spiel leider verloren, weil Sie sich \x81 \bberkauft haben!\n\n");
@@ -239,11 +241,10 @@ void druckeSpielfeld(int spieler[MAX_KARTEN], int dealer[MAX_KARTEN], int deck[D
 
 void kartenLeeren(int karten[MAX_KARTEN]) {
 	int i = 0;
-	
-		while(karten[i] != 0)
-		{
-			karten[i] = 0;
-			i++;
-		}
-}
 
+	while (karten[i] != 0)
+	{
+		karten[i] = 0;
+		i++;
+	}
+}
