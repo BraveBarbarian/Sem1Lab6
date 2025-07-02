@@ -3,12 +3,10 @@
 
 
 int main() {
-    
-    srand((unsigned int)time(NULL));
-    
-   /* blackJack();*/
 
-    ticTacToe();
+	srand((unsigned int)time(NULL));
 
-    return 0;
+	blackJack();
+
+	return 0;
 }

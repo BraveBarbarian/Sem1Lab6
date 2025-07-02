@@ -8,7 +8,7 @@ verwendet werden.
 
 
 void ticTacToe() {
-	char spielfeld[SPIELFELD_GROESSE][SPIELFELD_GROESSE] = { 0};
+    char spielfeld[SPIELFELD_GROESSE][SPIELFELD_GROESSE] = { 0 };
 
 
 	printf("Wilkommen zu Tic Tac Toe!\n");
